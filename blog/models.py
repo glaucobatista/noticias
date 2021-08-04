@@ -28,9 +28,12 @@ class Publicacao(models.Model):
     
     def get_absolute_url(self):
         return reverse('blog:publicacao_detalhe',
-        args=[self.publicado_em.year,
+        args=[
+        self.publicado_em.year,
         self.publicado_em.month,
-        self.publicado_em.day, self.slug])
+        self.publicado_em.day, 
+        self.slug
+        ])
 
 
     

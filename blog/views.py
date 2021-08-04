@@ -10,11 +10,10 @@ def publicacao_lista(request):
  {'publicacoes': publicacoes})
 
 def publicacao_detalhe(request, year, month, day, publicacao):
-    publicacao = get_object_or_404(Publicacao, slug=publicado_em,
+    publicacao = get_object_or_404(Publicacao, 
+    slug=publicacao,
     situacao='publicado',
-    publish__year=year,
-    publish__month=month,
-    publish__day=day)
-    return render(request,
-    'blog/publicacao/detail.html',
-    {'publicacao': publicacao})
+    publicado_em__year=year,
+    publicado_em__month=month,
+    publicado_em__day=day)
+    return render(request,'blog/publicacao/detalhe.html',{'publicacao': publicacao})

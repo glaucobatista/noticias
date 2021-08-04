@@ -13,4 +13,6 @@
  </p>
  {{ publicacao.descricao|truncatewords:30|linebreaks }}
  {% endfor %}
+
+ {% include "blog/publicacao/paginator.html" with page=page_obj %}
 {% endblock %}

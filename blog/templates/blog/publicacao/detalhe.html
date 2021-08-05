@@ -6,4 +6,47 @@
  Publicado em {{ publicacao.publicado_em }} por {{ publicacao.autor }}
  </p>
  {{ publicacao.descricao|linebreaks }}
+ <p>
+ <a href="{% url "blog:compartilhar_publicacao" publicacao.id %}">
+    compartilhar essa notícia
+ </a>
+</p>
+
+<h2>Publicações Similares</h2>
+{% for publicacao in publicacoes_similares %}
+ <p>
+ <a href="{{ publicacao.get_absolute_url }}">{{ publicacao.titulo }}</a>
+ </p>
+{% empty %}
+ Não há publicações similares ainda.
+{% endfor %}
+{% with comentarios.count as total_comentarios %}
+ <h2>
+ {{ total_comentarios }} Comentário{{ total_comentarios|pluralize }}
+ </h2>
+{% endwith %}
+
+{% for comentario in comentarios %}
+    <div class="comment">
+        <p class="info">
+            Comentado {{ forloop.counter }} por {{ comentario.nome }}
+            {{ comentario.criado_em }}
+        </p>
+        {{ comentario.descricao|linebreaks }}
+    </div>
+{% empty %}
+    <p>Não há comentários ainda.</p>
+{% endfor %}
+
+{% if novo_comentario %}
+    <h2>Seu comentário foi adicionado com sucesso!</h2>
+{% else %}
+    <h2>Adicionar um novo comentário</h2>
+    <form method="post">
+        {{comentario_form.as_p }}
+        {% csrf_token %}
+        <p><input type="submit" value="Comentar"></p>
+    </form>
+{% endif %}
+
 {% endblock %}

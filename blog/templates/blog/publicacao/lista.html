@@ -1,18 +1,28 @@
 {% extends "blog/base.html" %}
 {% block title %}Blog de Notícias{% endblock %}
 {% block content %}
- <h1>Blog de notícias sobre tudo</h1>
- {% for publicacao in publicacoes %}
- <h2>
- <a href="{{ publicacao.get_absolute_url }}">
- {{ publicacao.titulo }}
- </a>
- </h2>
- <p class="date">
- Publicação {{ publicacao.publicado_em }} por {{ publicacao.autor }}
- </p>
- {{ publicacao.descricao|truncatewords:30|linebreaks }}
- {% endfor %}
+    <h1>Blog de notícias sobre tudo</h1>
+    {% for publicacao in publicacoes %}
+        <h2>
+        <a href="{{ publicacao.get_absolute_url }}">
+        {{ publicacao.titulo }}
+        </a>
+        </h2>
+        <p class="tags">
+            Tags: 
+                {% for tag in publicacao.tags.all %}
+                <a href="{% url "blog:publicacoes_por_tag" tag.slug %}">
+                {{ tag.name }}
+                </a>
+                {% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        </p>
+        <p class="date">
+            Publicação {{ publicacao.publicado_em }} por {{ publicacao.autor }}
+        </p>
+        {{ publicacao.descricao|truncatewords:30|linebreaks }}
+    {% endfor %}
+    
 
- {% include "blog/publicacao/paginator.html" with page=page_obj %}
+    {% include "blog/publicacao/paginator.html" with page=publicacoes %}
 {% endblock %}

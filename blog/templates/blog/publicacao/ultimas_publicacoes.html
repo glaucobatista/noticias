@@ -1,0 +1,7 @@
+<ul>
+ {% for publicacao in ultimas_publicacoes %}
+    <li>
+        <a href="{{ publicacao.get_absolute_url }}">{{ publicacao.titulo }}</a>
+    </li>
+ {% endfor %}
+</ul>

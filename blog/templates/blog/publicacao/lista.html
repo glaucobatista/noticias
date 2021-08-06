@@ -1,4 +1,5 @@
 {% extends "blog/base.html" %}
+{% load blog_tags %}
 {% block title %}Blog de Notícias{% endblock %}
 {% block content %}
     <h1>Blog de notícias sobre tudo</h1>
@@ -20,7 +21,7 @@
         <p class="date">
             Publicação {{ publicacao.publicado_em }} por {{ publicacao.autor }}
         </p>
-        {{ publicacao.descricao|truncatewords:30|linebreaks }}
+        {{ publicacao.descricao|markdown|truncatewords_html:30 }}
     {% endfor %}
     
 

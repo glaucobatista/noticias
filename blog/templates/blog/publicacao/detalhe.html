@@ -1,11 +1,12 @@
 {% extends "blog/base.html" %}
+{% load blog_tags %}
 {% block title %}{{ publicacao.titulo }}{% endblock %}
 {% block content %}
  <h1>{{ publicacao.titulo }}</h1>
  <p class="date">
  Publicado em {{ publicacao.publicado_em }} por {{ publicacao.autor }}
  </p>
- {{ publicacao.descricao|linebreaks }}
+ {{ publicacao.descricao|markdown }}
  <p>
  <a href="{% url "blog:compartilhar_publicacao" publicacao.id %}">
     compartilhar essa notícia
@@ -32,7 +33,7 @@
             Comentado {{ forloop.counter }} por {{ comentario.nome }}
             {{ comentario.criado_em }}
         </p>
-        {{ comentario.descricao|linebreaks }}
+        {{ comentario.descricao|markdown }}
     </div>
 {% empty %}
     <p>Não há comentários ainda.</p>

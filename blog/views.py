@@ -8,11 +8,11 @@ from taggit.models import Tag
 from .models import Publicacao, Comentario
 from .forms import EnviarEmailForm, ComentarioForm
 
-class PublicacaoListView(ListView):
-    queryset = Publicacao.objects.all()
-    context_object_name = 'publicacoes'
-    paginate_by = 5
-    template_name = 'blog/publicacao/lista.html'
+# class PublicacaoListView(ListView):
+#     queryset = Publicacao.objects.all()
+#     context_object_name = 'publicacoes'
+#     paginate_by = 5
+#     template_name = 'blog/publicacao/lista.html'
 
 
 def publicacao_lista(request, tag_slug=None):

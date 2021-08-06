@@ -1,3 +1,4 @@
+{% load blog_tags %}
 {% load static %}
 <!DOCTYPE html>
 <html>
@@ -14,6 +15,18 @@
     <div id="sidebar">
         <h2>Blog de Notícias</h2>
         <p>Blog de notícias sobre tudo.</p>
+        <p>Já foram postadas {% total_publicacoes %} publicações até agora.</p>
+        <h3>Ultimas Publicações</h3>
+        {% mostrar_ultimas_publicacoes 2 %}
+        <h3>Publicações mais comentadas</h3>
+        {% buscar_publicacoes_mais_comentadas as publicacoes_mais_comentadas %}
+        <ul>
+            {% for publicacao in publicacoes_mais_comentadas %}
+                <li>
+                    <a href="{{ publicacao.get_absolute_url }}">{{ publicacao.titulo }}</a>
+                </li>
+            {% endfor %}
+        </ul>
     </div>
     </body>
 </html>
